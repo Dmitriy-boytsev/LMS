@@ -52,3 +52,11 @@
 
 ```sh
 python main.py
+```
+
+Запустите тесты с помощью Pytest
+```sh
+pytest
+```
+
+
