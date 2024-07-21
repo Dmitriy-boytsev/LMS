@@ -1,5 +1,6 @@
 from library import Library
 
+
 def add_book(library: Library) -> None:
     """
     Добавляет книгу в библиотеку.
@@ -11,6 +12,7 @@ def add_book(library: Library) -> None:
     year = int(input("Введите год издания книги: "))
     library.add_book(title, author, year)
 
+
 def remove_book(library: Library) -> None:
     """
     Удаляет книгу из библиотеки по ID.
@@ -19,6 +21,7 @@ def remove_book(library: Library) -> None:
     """
     book_id = int(input("Введите id книги, которую хотите удалить: "))
     library.remove_book(book_id)
+
 
 def search_books(library: Library) -> None:
     """
@@ -43,6 +46,7 @@ def search_books(library: Library) -> None:
     for book in books:
         print(f"id: {book.id}, title: {book.title}, author: {book.author}, year: {book.year}, status: {book.status}")
 
+
 def display_books(library: Library) -> None:
     """
     Отображает все книги в библиотеке.
@@ -50,6 +54,7 @@ def display_books(library: Library) -> None:
     library: Объект библиотеки.
     """
     library.display_books()
+
 
 def change_status(library: Library) -> None:
     """
@@ -61,6 +66,7 @@ def change_status(library: Library) -> None:
     status = input("Введите новый статус книги (в наличии/выдана): ")
     library.change_status(book_id, status)
 
+
 def exit_program(library: Library) -> None:
     """
     Завершает выполнение программы.
@@ -69,6 +75,7 @@ def exit_program(library: Library) -> None:
     """
     print("Выход из программы.")
     exit()
+
 
 def main() -> None:
     """
@@ -93,12 +100,12 @@ def main() -> None:
         print("5. Изменить статус книги")
         print("6. Выйти")
         choice = input("Выберите опцию: ")
-
         action = actions.get(choice)
         if action:
             action(library)
         else:
             print("Некорректный выбор. Пожалуйста, выберите снова.")
+
 
 if __name__ == "__main__":
     main()

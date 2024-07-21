@@ -3,6 +3,7 @@ import os
 import json
 from library import Library, Book
 
+
 @pytest.fixture
 def library(tmpdir):
     """
@@ -10,6 +11,7 @@ def library(tmpdir):
     """
     data_file = tmpdir.join("data.json")
     return Library(str(data_file))
+
 
 def test_add_book(library):
     """
@@ -21,6 +23,7 @@ def test_add_book(library):
     assert library.books[0].author == "Test Author"
     assert library.books[0].year == 2022
 
+
 def test_remove_book(library):
     """
     Тест удаления книги из библиотеки.
@@ -29,6 +32,7 @@ def test_remove_book(library):
     book_id = library.books[0].id
     library.remove_book(book_id)
     assert len(library.books) == 0
+
 
 def test_change_status(library):
     """
@@ -41,6 +45,7 @@ def test_change_status(library):
     print(f"После изменения: {library.books[0].status}")
     assert library.books[0].status == "выдана"
 
+
 def test_search_books(library):
     """
     Тест поиска книги в библиотеке.
@@ -49,6 +54,7 @@ def test_search_books(library):
     results = library.search_books(title="Test Title")
     assert len(results) == 1
     assert results[0].title == "Test Title"
+
 
 def test_save_and_load_books(library):
     """
@@ -63,6 +69,7 @@ def test_save_and_load_books(library):
     assert new_library.books[0].author == "Test Author"
     assert new_library.books[0].year == 2022
 
+
 def test_find_book_by_id(library):
     """
     Тест поиска книги по идентификатору.
@@ -73,6 +80,7 @@ def test_find_book_by_id(library):
     assert found_book is not None
     assert found_book.title == "Test Title"
 
+
 def test_display_books(capsys, library):
     """
     Тест отображения всех книг в библиотеке.
@@ -81,6 +89,7 @@ def test_display_books(capsys, library):
     library.display_books()
     captured = capsys.readouterr()
     assert "Test Title" in captured.out
+
 
 def test_empty_library_display_books(capsys, library):
     """

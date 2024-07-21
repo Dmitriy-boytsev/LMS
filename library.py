@@ -2,6 +2,7 @@ import json
 import os
 from typing import List, Optional
 
+
 class Book:
     def __init__(self, id: int, title: str, author: str, year: int, status: str = "в наличии"):
         """
@@ -19,6 +20,7 @@ class Book:
         self.year = year
         self.status = status
 
+
     def to_dict(self) -> dict:
         """
         Преобразует объект книги в словарь.
@@ -33,6 +35,7 @@ class Book:
             "status": self.status
         }
 
+
     @classmethod
     def from_dict(cls, data: dict) -> 'Book':
         """
@@ -42,6 +45,7 @@ class Book:
         :return: Объект книги.
         """
         return cls(data["id"], data["title"], data["author"], data["year"], data["status"])
+
 
 class Library:
     def __init__(self, data_file: str = 'data.json'):
@@ -53,6 +57,7 @@ class Library:
         self.data_file = data_file
         self.books: List[Book] = []
         self.load_books()
+
 
     def load_books(self) -> None:
         """
@@ -68,12 +73,14 @@ class Library:
         else:
             self.books = []
 
+
     def save_books(self) -> None:
         """
         Сохраняет книги в файл данных.
         """
         with open(self.data_file, 'w', encoding='utf-8') as f:
             json.dump([book.to_dict() for book in self.books], f, ensure_ascii=False, indent=4)
+
 
     def add_book(self, title: str, author: str, year: int) -> None:
         """
@@ -89,6 +96,7 @@ class Library:
         self.save_books()
         print(f"Книга '{title}' добавлена с id {new_id}")
 
+
     def generate_id(self) -> int:
         """
         Генерирует новый уникальный идентификатор для книги.
@@ -98,6 +106,7 @@ class Library:
         if not self.books:
             return 1
         return max(book.id for book in self.books) + 1
+
 
     def remove_book(self, book_id: int) -> None:
         """
@@ -113,6 +122,7 @@ class Library:
         else:
             print(f"Книга с id {book_id} не найдена")
 
+
     def find_book_by_id(self, book_id: int) -> Optional[Book]:
         """
         Находит книгу по ее идентификатору.
@@ -124,6 +134,7 @@ class Library:
             if book.id == book_id:
                 return book
         return None
+
 
     def search_books(self, title: str = "", author: str = "", year: int = None) -> List[Book]:
         """
@@ -140,6 +151,7 @@ class Library:
                 results.append(book)
         return results
 
+
     def display_books(self) -> None:
         """
         Отображает все книги в библиотеке.
@@ -148,6 +160,7 @@ class Library:
             print("В библиотеке нет книг.")
         for book in self.books:
             print(f"id: {book.id}, title: {book.title}, author: {book.author}, year: {book.year}, status: {book.status}")
+
 
     def change_status(self, book_id: int, status: str):
         """
